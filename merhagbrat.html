@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sc</title>
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+</head>
+<body>
+        <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        ul{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        header{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: silver;
+            padding: 10px 1rem;
+            position: relative; 
+        }
+        nav ul{
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        a{
+            text-decoration: none;
+            color: brown;
+            font-size: 1.1rem;
+        }
+        header img,footer img{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color:#ffffff;
+        }
+        .logo{
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 1.8rem;
+            font-weight: bolder;
+            margin-right: .7rem;
+            position: relative;
+            z-index: 1000;
+        }
+        .user-action button{
+            border-radius: 10px;
+            padding: 8px 20px;
+            font-size: 1rem;
+            color: silver;
+            background: brown;
+            border: none;
+            cursor: pointer;
+        }
+        .menu{
+            display: none;
+            position: relative;
+            z-index: 1000;
+            font-size: 1.8rem;
+            background: transparent;
+            border: none;
+        }
+        @media (max-width:760px) {
+            nav a:not(.logo),.user-action{
+                display: none;
+            }
+            .menu{
+                display: block;
+            }
+        }
+
+        .dropdown{ 
+            position: absolute;
+            top: 0;
+            right: 0;
+            transform: scale(0);
+            background: silver; 
+            height: 100vh;
+            width: 100vw;
+            padding: 5rem 1rem 2rem;
+            transition: .5s ease-in-out;
+            z-index: 500;
+        }
+        .menu.active + .dropdown{
+            display: block;
+            transform: scale(1);
+        }
+        .dropdown a:not(.btn_r){
+            display: flex;
+            width: 100%;
+            padding: 10px 5px;
+            font-size: 1.5rem;
+        }
+        hr{
+            border-color: black;
+            margin-top: 1rem;
+        }.dropdown div{
+            padding: 10px 5px;
+            text-align: center;
+            color: green;
+            font-size: 1.1rem;
+        }
+        .dropdown div .btn_r{
+            border-radius: 10px;
+            padding: 8px 20px;
+            font-size: 1.5rem;
+            color: silver;
+            background: brown;
+            border: none;
+            cursor: pointer;  
+        }
+      header  p span{
+            font-size: 1.8rem;
+            font-weight: bolder;
+        }
+        
+    </style>
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a href="index.html" class="logo">
+                        <img src="IMG_20250805_060427_060.png" alt="">
+                        <p>ደብረ ገነት</p>
+                    </a>
+                </li>
+                <li><a href="https://orthodoxmezmur.com/">መዝሙር</a></li>
+                <li><a href="menfesawiGxmoch.html">መንፈሳዊ ግጥሞች</a></li>
+                <li><a href="merhagbrat.html">መርሀግብራት</a></li>
+                <li><a href="images.html">የሰንበት ት/በቱ ማስታወሻዎች</a></li>
+            </ul>
+        </nav>
+        <div class="user-action">
+            <button>ምዝገባ</button>
+        </div>
+        <button class="menu"><i class="ri-menu-3-line"></i></button>
+        <div class="dropdown"> 
+            <ul>
+                <li><a href="https://orthodoxmezmur.com/">መዝሙር</a></li>
+                <li><a href="menfesawiGxmoch.html">መንፈሳዊ ግጥሞች</a></li>
+                <li><a href="merhagbrat.html">መርሀግብራት</a></li>
+                <li><a href="images.html">የሰንበት ት/በቱ ማስታወሻዎች</a></li>
+            </ul>
+            <hr>
+            <div>
+                <p>የደብረ ገነት ሰንበት ት/በትን ለመቀላቀል ይፈልጋሉ?</p> 
+                <br>
+                <a href="form.html" class="btn_r">ለመመዝገብ</a>
+            </div>
+            <hr>
+            <div>
+                <p>ሰንበት ት/በቱን በገንዘብ ለመደገፍ ከታች ባለዉ account ቁጥር ድጋፍ ማድረግ ይችላሉ! <br> <span>1000182896288</span></p>
+            </div>
+        </div>
+    </header>
+    <script>
+        const btn=document.querySelector('.menu');
+        btn.addEventListener('click', ()=>{
+            btn.classList.toggle('active'); 
+            if(btn.classList.contains('active')){
+               btn.innerHTML='<i class="ri-close-line"></i>';
+            }else{
+               btn.innerHTML='<i class="ri-menu-3-line"></i>';
+            }
+            
+        });
+    </script>
+    <style> 
+        body{
+            background-color: silver;
+        }
+             table {
+    width: 100%;
+    border-collapse: collapse; 
+    font-size: 1.3rem;
+    color: gold;
+  } 
+  td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid gold;
+  }
+  section{ 
+    margin: 4rem 1rem 0;
+    background: brown;
+    padding: 15px;
+    border-radius: 10px;
+  }
+ section h1{
+    font-size: 1.9rem;
+    text-align: center;
+    color: white;
+    font-weight: bolder;
+    margin-bottom: 1.2rem;
+ }
+ 
+    </style>
+    <section>
+        <h1>መርሀግብራት</h1>
+      <table>
+        <tbody>
+            <tr>
+                <td>ሰኞ(ኮርስ)</td>
+                <td>11፡00am</td>
+            </tr>
+            <tr>
+                <td>አርብ(ኪነ ጥበብ)</td>
+                <td>11፡00am</td>
+            </tr>
+                        <tr>
+                <td>ቅዳሚ(መዝሙር ጥናት)</td>
+                <td>10፡00am</td>
+            </tr>
+            <tr>
+                <td>እሁድ(መንፈሳዊ ዝግጅት)</td>
+                <td>8፡00am</td>
+            </tr>
+        </tbody>
+    </table>
+    </section>
+</body>
+</html>

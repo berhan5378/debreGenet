@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title> 
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+</head>
+<body>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        ul{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        header{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: silver;
+            padding: 10px 1rem;
+            position: relative; 
+        }
+        nav ul{
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        a{
+            text-decoration: none;
+            color: brown;
+            font-size: 1.1rem;
+        }
+        header img,footer img{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color:#ffffff;
+        }
+        .logo{
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 1.8rem;
+            font-weight: bolder;
+            margin-right: .7rem;
+            position: relative;
+            z-index: 1000;
+        }
+        .user-action button{
+            border-radius: 10px;
+            padding: 8px 20px;
+            font-size: 1rem;
+            color: silver;
+            background: brown;
+            border: none;
+            cursor: pointer;
+        }
+        .menu{
+            display: none;
+            position: relative;
+            z-index: 1000;
+            font-size: 1.8rem;
+            background: transparent;
+            border: none;
+        }
+        @media (max-width:760px) {
+            nav a:not(.logo),.user-action{
+                display: none;
+            }
+            .menu{
+                display: block;
+            }
+        }
+
+        .dropdown{ 
+            position: absolute;
+            top: 0;
+            right: 0;
+            transform: scale(0);
+            background: silver; 
+            height: 100vh;
+            width: 100vw;
+            padding: 5rem 1rem 2rem;
+            transition: .5s ease-in-out;
+            z-index: 500;
+        }
+        .menu.active + .dropdown{
+            display: block;
+            transform: scale(1);
+        }
+        .dropdown a:not(.btn_r){
+            display: flex;
+            width: 100%;
+            padding: 10px 5px;
+            font-size: 1.5rem;
+        }
+        hr{
+            border-color: black;
+            margin-top: 1rem;
+        }.dropdown div{
+            padding: 10px 5px;
+            text-align: center;
+            color: green;
+            font-size: 1.1rem;
+        }
+        .dropdown div .btn_r{
+            border-radius: 10px;
+            padding: 8px 20px;
+            font-size: 1.5rem;
+            color: silver;
+            background: brown;
+            border: none;
+            cursor: pointer;  
+        }
+      header  p span{
+            font-size: 1.8rem;
+            font-weight: bolder;
+        }
+        
+    </style>
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a href="index.html" class="logo">
+                        <img src="IMG_20250805_060427_060.png" alt="">
+                        <p>ደብረ ገነት</p>
+                    </a>
+                </li>
+                <li><a href="https://orthodoxmezmur.com/">መዝሙር</a></li>
+                <li><a href="menfesawiGxmoch.html">መንፈሳዊ ግጥሞች</a></li>
+                <li><a href="merhagbrat.html">መርሀግብራት</a></li>
+                <li><a href="images.html">የሰንበት ት/ቤቱ ማስታወሻዎች</a></li>
+            </ul>
+        </nav>
+        <div class="user-action">
+            <button>ምዝገባ</button>
+        </div>
+        <button class="menu"><i class="ri-menu-3-line"></i></button>
+        <div class="dropdown"> 
+            <ul>
+                <li><a href="https://orthodoxmezmur.com/">መዝሙር</a></li>
+                <li><a href="menfesawiGxmoch.html">መንፈሳዊ ግጥሞች</a></li>
+                <li><a href="merhagbrat.html">መርሀግብራት</a></li>
+                <li><a href="images.html">የሰንበት ት/ቤቱ ማስታወሻዎች</a></li>
+            </ul>
+            <hr>
+            <div>
+                <p>የደብረ ገነት ሰንበት ት/ቤትን ለመቀላቀል ይፈልጋሉ?</p> 
+                <br>
+                <a href="form.html" class="btn_r">ለመመዝገብ</a>
+            </div>
+            <hr>
+            <div>
+                <p>ሰንበት ት/ቤቱን በገንዘብ ለመደገፍ ከታች ባለዉ account ቁጥር ድጋፍ ማድረግ ይችላሉ! <br> <span>1000182896288</span></p>
+            </div>
+        </div>
+    </header>
+    <script>
+        const btn=document.querySelector('.menu');
+        btn.addEventListener('click', ()=>{
+            btn.classList.toggle('active'); 
+            if(btn.classList.contains('active')){
+               btn.innerHTML='<i class="ri-close-line"></i>';
+            }else{
+               btn.innerHTML='<i class="ri-menu-3-line"></i>';
+            }
+            
+        });
+    </script>
+    <style>
+        .home {
+   position: relative;
+   height:300px; 
+   overflow: hidden;
+}
+
+.home .home-slideshow {
+   position: absolute;
+   width: 100%;
+   height: 100%;
+}
+
+.home .slide {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   opacity: 0;
+   background-size: cover;
+   background-position: center;
+   transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+  
+        .home .slide.active {
+   opacity: 1;
+}
+
+.home .hero-overlay {
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   z-index: 100;
+   background: linear-gradient(45deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 100%);
+}
+
+.home .hero-content {
+   position: relative;
+   z-index: 2;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   height: 100%;
+   padding: 2rem;
+   text-align: center;
+   color: white;
+}
+
+.home .hero-title {
+   font-size: 3.5rem;
+   margin: 0 0 1.5rem;
+   letter-spacing: -0.03em;
+   transform: translateY(30px);
+   opacity: 0;
+   animation: slideUp 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+.home .hero-subtitle {
+   font-size: 1.5rem;
+   margin: 0 0 2.5rem;
+   font-weight: 300;
+   letter-spacing: 0.03em;
+   opacity: 0;
+   transform: translateY(30px);
+   animation: slideUp 0.8s 0.2s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+.home .hero-cta {
+   display: inline-flex;
+   align-items: center;
+   padding: 1.2rem 2.5rem;
+   background: rgba(255,255,255,0.1);
+   backdrop-filter: blur(8px);
+   border-radius: 50px;
+   color: white;
+   text-decoration: none;
+   font-weight: 500;
+   letter-spacing: 0.03em;
+   transition: all 0.3s ease;
+   opacity: 0;
+   transform: translateY(30px);
+   animation: slideUp 0.8s 0.4s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+   border: 1px solid rgba(255,255,255,0.2);
+}
+
+.home .hero-cta:hover {
+   background: rgba(231, 76, 60, 0.9);
+   transform: translateY(-3px);
+   box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.home .arrow {
+   width: 1.4em;
+   height: 1.4em;
+   margin-left: 0.8rem;
+   stroke-width: 2;
+   transition: transform 0.3s ease;
+}
+
+.home .hero-cta:hover .arrow {
+   transform: translateX(4px);
+}
+
+@keyframes slideUp {
+   to {
+       opacity: 1;
+       transform: translateY(0);
+   }
+}
+
+@media (max-width: 1043px) {
+   .home .hero-title {
+       font-size: 2.5rem;
+   }
+   
+   .home .hero-subtitle {
+       font-size: 1.2rem;
+   }
+   
+   .home .hero-cta {
+       padding: 1rem 2rem;
+   }
+}
+@media (min-width: 720px) { 
+    .home {
+        height: 93vh;
+    }
+}
+@media (max-width: 439px) {
+   .home .hero-title {
+      font-size: 2rem;
+  }
+  
+  .home .hero-subtitle {
+      font-size: 1rem;
+  }
+}
+    </style>
+    <main>
+        <section class="home">
+            <div class="home-slideshow">
+                <div class="slide active" style="background-image: url('IMG_20250805_074705_377.jpg')"></div>
+                <div class="slide" style="background-image: url('IMG_20250805_074655_324.jpg')"></div>
+            </div>
+                        <div class="hero-content">
+                <h1 class="hero-title">የአለታ ወንዶ ደብረ ገነት ቅዱስ ጊዮርጊስ ቤተ ክርስቲያን</h1>
+                <p class="hero-subtitle">የደብረ ገነት ሰንበት ት/ቤትን ለመቀላቀል ይፈልጋሉ?</p>
+                <a href="form.html" class="hero-cta">
+                     ለመመዝገብ
+                    <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="hero-overlay"></div>
+        </section>
+        <style>
+            .about{
+                display: flex;
+                justify-content: center;
+            }
+            .about-content{
+                position: relative; 
+                max-width: 1200px;
+                padding: 2rem;
+                background-color: silver;  
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                font-size: 1.4rem;
+                z-index: 100;
+            }
+            .more{
+                display: none;
+                cursor: pointer;
+            }
+            .read{ 
+                font-size: 1.4rem;
+                color: green;
+            }
+            @media (min-width: 720px) { 
+    .about-content {
+       margin-top: -4rem;
+       border-radius: 10px;
+    }
+     .more{
+        display: block;
+     }
+      .read{
+        display: none;
+      }
+    
+}
+        </style>
+        <section class="about">
+            <div class="about-content"> 
+                <p class="about-description"> 
+                    ጣልያን ኢትዮጵያን በወረረበት ዘመን የኢትዮጵያ ሰዎች ታቦታችንን ለሽፍታዎች(ለጣልያኖች)አንሰጥም ብለው የጊዮርጊስን ታቦት ወደ ኬንያ(kenya)ይዘው ሸሸጉት።
+‎ከአራት አመት በኋላ በአድዋ ላይ በተካሄደው ጦርነት ኢትዮጵያውያን ጣልያንን ድል ከነሱ እና ኢትዮጵያ ባንዲራዋን ከፍ አድርጋ ካቆመች በኋላ በ1934 አ.ም አሁን  ቤተ ክርስቲያኒቱ በምትገኝበት ቦታ ላይ መጥተው ስፍራውን ገዝተው በመስቀል ዙሪያውን አጠሩት ከዚያም ቤተ ክርስቲያኒቱ ተሰራች።
+ከዚህም በኋላ ጃንሆይ(ንጉሰ ነገስት ዘኢትዮጵያ) መጥተው ለስደተኞቹ(ታቦቱን ይዘው ለመጡት)ሰዎች የገንዘብ ድጋፍ በማድረግ እና 20×30 የሚያክል መሬት ላይ  ከላይ በምስሉ የምትመለከቱትን ሕንጻ ቤተ ክርስቲያን እንዲሰራ አደረጉ።
+‎ታድያ አገልግሎቱን በዚያ ያደረገው ደብረ ገነት ቅ/ጊ ሰንበት ት/ት ቤትም በአገልግሎት ብዙ አመታትን ካስቆጠሩ ሰንበት ት/ት ቤቶች መካከል አንዱ ነው።
+                    <span class="more">
+ ‎የሰንበት ት/ት ቤቱ አላማ የደብሩን ሰንበት ት/ት ቤት አገልጋዮች በመንፈሳዊ ትምህርቶች፣በዝማሬዎች፣ጸጋን በማወቅና በማዳበር እናም የተለያዩ የበጎ ፈቃድ አገልግሎቶችን እንዲሳተፉ እና በመንፈሳዊ ሕይወታቸው ላይ እድገትን እንዲያመጡ ማድረግ ነው።
+‎ይህ ሰንበት ት/ት ቤት ብዙ ፈተናዎች የገጠሙት ሲሆን እነዛንም ፈተናዎች በጽናት በእምነት ማለፍ ችሏል(ከእግዚአብሔር ከሆንን ጠላትን ማሳፈር እንደሚቻል አሳይቷል)።
+‎ይህ ሰንበት ት/ት ቤት ከዚህም በኋላ ብዙ ፈተናዎች እንደሚመጡ እነሱንም ከፈጣሪ ጋር በእምነት በጽናት በትዕግስት ማለፍ እንደሚችል ያምናል
+                </span> <span class="read">...ተጨማሪ</span> </p>
+            </div>
+        </section>
+<script>
+    document.querySelector('.read').addEventListener('click', function() {
+        const moreText = document.querySelector('.more');
+        if (moreText.style.display === 'block') {
+            moreText.style.display = 'none';
+            this.textContent = '...ተጨማሪ';
+        } else {
+            moreText.style.display = 'block';
+            this.textContent = 'ተመለስ';
+        }
+    });
+    const slides = document.querySelectorAll('.home .slide');
+    let currentSlide = 1;
+    if (slides.length > 0) {
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 4000);
+    }
+</script>
+<section class="num">
+<div>
+<div>
+        <p>5000</p>
+    <p>ሰንበት ተማሪ</p>
+</div>
+</div>
+<div>
+<div>
+        <p>5000</p>
+    <p>ሰንበት ተማሪ</p>
+</div>
+</div>
+<div>
+<div>
+    <p>5000</p>
+    <p>ሰንበት ተማሪ</p>
+</div>
+</div>
+</section>
+<style>
+    .num{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem; 
+        padding:2rem 0;
+    }
+    .num >div{
+        border: 1px solid green;
+        border-radius: 10px;
+        min-width: 250px;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: 1.4rem;
+        color: brown;
+        background: gold;
+    } 
+    .num >div p{
+        margin-bottom: 10px;
+    }
+</style>
+<style>
+    .news{
+        margin: 1rem 0;
+    }
+    .news h1{
+        text-align: center;
+        margin-top: 1.2rem;
+        font-size: 3rem;
+        margin-bottom: 1.2rem;
+    }
+    .imgs{
+        display: flex;
+        flex-wrap: wrap; 
+        justify-content: center;
+        gap: 1.2rem;
+        color: brown;
+    }
+    .imgs div{
+        border: 1px solid silver;
+        background: silver;
+        border-radius: 10px; 
+        overflow: hidden;
+        width: 300px; 
+        
+
+    }
+    .imgs img{ 
+        width: 300px; 
+        height: 250px;
+    }
+    .imgs p{
+        padding: 10px;
+    }
+</style>
+<section class="news">
+    <h1>ማስታወቂያ</h1>
+    <div class="imgs">
+        <div>
+            <img src="IMG_20250805_074655_324.jpg" alt="">
+            <p>ጌታችን መድኃኒታችን ኢየሱስ ክርስቶስ ከተጠመቀ ጌታችን መድኃኒታችን ኢየሱስ ክርስቶስ ከተጠመቀ ጌታችን መድኃኒታችን ኢየሱስ ክርስቶስ ከተጠመቀ</p>
+    </div>
+        <div>
+                    <img src="IMG_20250805_074705_377.jpg" alt="">
+            <p>ጌታችን መድኃኒታችን ኢየሱስ ክርስቶስ ከተጠመቀ ጌታችን መድኃኒታችን ኢየሱስ ክርስቶስ ከተጠመቀ ጌታችን መድኃኒታችን ኢየሱስ ክርስቶስ ከተጠመቀ</p>
+    </div>
+        <div>
+                            <img src="IMG_20250805_074705_377.jpg" alt="">
+            <p>ጌታችን መድኃኒታችን ኢየሱስ ክርስቶስ ከተጠመቀ ጌታችን መድኃኒታችን ኢየሱስ ክርስቶስ ከተጠመቀ ጌታችን መድኃኒታችን ኢየሱስ ክርስቶስ ከተጠመቀ</p>
+    </div>
+    </div>
+</section>
+    </main>
+    <footer> 
+ <style>
+   footer .logo{
+       display: flex;
+       justify-content: center;
+       color: brown;
+    } 
+ </style>
+        <ul> 
+            <li id="logo">                            <a href="#" class="logo">
+                        <img src="IMG_20250805_060427_060.png" alt="">
+                        <p>ደብረ ገነት</p>
+                    </a></li> 
+            <li>
+                <a href="https://orthodoxmezmur.com/">መዝሙር</a>
+                <a href="menfesawiGxmoch.html">መንፈሳዊ ግጥሞች</a>
+                <a href="merhagbrat.html">መርሀግብራት</a>
+                <a href="images.html">የሰንበት ት/ቤቱ ማስታወሻዎች</a> 
+            </li>
+        </ul>
+        <ul>
+            <li class="Connect">ማህበራዊ ገጽ</li>
+            <li>
+                <a href="#"><i class="ri-instagram-line"></i></a>
+                <a href="#"><i class="ri-twitter-x-fill"></i></a>
+                <a href="#"><i class="ri-facebook-line"></i></a>
+                <a href="#"><i class="ri-tiktok-line"></i></a>
+                <a href="#"><i class="ri-whatsapp-line"></i></a>
+            </li>
+        </ul>
+        <p class="footer-contents-bottom">
+            &copy;2024-2025 All Rights Reserved
+        </p>
+    </footer>
+    <style>
+        footer { 
+    position: relative;
+    background: silver; 
+    padding: 5rem 0;
+    width: 100%; 
+    color: black;
+    display: grid;
+    justify-content: center;
+    text-align: center;
+    gap: 2rem;
+    overflow: hidden;
+  }
+  footer ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  } 
+  footer #logo {
+    font-size: 1.5rem; 
+    padding: 0 0 1.6rem;
+    color: #097be4;
+  }
+  footer ul li+li{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 1rem;
+    justify-content: center;
+  }
+  footer ul .Connect {
+    padding: .7rem 0;
+    color: #333;
+  }
+  footer ul li a{
+    padding: 0 .5rem;
+    color: black;
+    font-size: .9rem; 
+    text-decoration: none;
+  }
+  footer ul li a:hover{
+    color: #566573;
+  }
+  footer ul li i {
+    font-size: 1rem;
+  }
+  .ri-instagram-line {
+    color: #cc39a4;
+  }
+  .ri-twitter-x-fill{
+    color: #333;
+  }
+  .ri-facebook-line{
+    color: #03A9F4;
+  }
+  .ri-whatsapp-line{
+    color: lightgreen;
+  }
+    </style>
+</body>
+</html>

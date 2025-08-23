@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="am">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>መንፈሳዊ ግጥሞች</title>
+          <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+  <style>
+            *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    :root{
+      --bg:#f7f7fb;
+      --card:#ffffff;
+      --accent:#2b6cb0;
+      --muted:#6b7280;
+      font-family: "Noto Sans", "Segoe UI", Roboto, Arial, sans-serif;
+    }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:#111827;
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+   
+    }
+    main{
+   padding:32px;
+    }
+    .header{
+      max-width:900px;
+      margin:0 auto 24px;
+      text-align:center;
+    }
+    h1{
+      margin:0 0 8px;
+      color:var(--accent);
+      font-size:28px;
+    }
+    p.lead{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .container{
+      max-width:900px;
+      margin:18px auto;
+      display:grid;
+      gap:14px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .card{
+      background:var(--card);
+      border-radius:12px;
+      padding:16px;
+      box-shadow:0 6px 18px rgba(15,23,42,0.07);
+      display:flex;
+      flex-direction:column;
+      min-height:140px;
+    }
+
+    .title{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    }
+    .title h2{
+      margin:0;
+      font-size:18px;
+      color:#0f172a;
+    }
+    .meta{
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .poem{
+      margin-top:12px;
+      white-space:pre-wrap;
+      font-size:15px;
+      color:#111827;
+      flex:1;
+    }
+
+    /* Expand / collapse */
+    .collapsed .poem {
+      max-height:84px;
+      overflow:hidden;
+      position:relative;
+    }
+    .collapsed .poem::after{
+      content:"";
+      position:absolute;
+      left:0; right:0; bottom:0;
+      height:40px;
+      background: linear-gradient(transparent, var(--card));
+    }
+
+    .controls{
+      margin-top:12px;
+      display:flex;
+      gap:8px;
+      justify-content:flex-end;
+    }
+    button:not(.menu){
+      background:var(--accent);
+      color:white;
+      border:none;
+      padding:8px 12px;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:600;
+    }
+    button.ghost{
+      background:transparent;
+      color:var(--accent);
+      border:1px solid rgba(43,108,176,0.15);
+    }
+
+    footer{
+      max-width:900px;
+      margin:26px auto 0;
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    @media (max-width:520px){
+      main{ padding:16px; }
+      .poem{ font-size:14px; }
+      h1{ font-size:22px; }
+    }
+  </style>
+</head>
+<body>
+        <style>
+
+        ul{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        header{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: silver;
+            padding: 10px 1rem;
+            position: relative; 
+        }
+        nav ul{
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        a{
+            text-decoration: none;
+            color: brown;
+            font-size: 1.1rem;
+        }
+        header img,footer img{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color:#ffffff;
+        }
+        .logo{
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 1.8rem;
+            font-weight: bolder;
+            margin-right: .7rem;
+            position: relative;
+            z-index: 1000;
+        }
+        .user-action button{
+            border-radius: 10px;
+            padding: 8px 20px;
+            font-size: 1rem;
+            color: silver;
+            background: brown;
+            border: none;
+            cursor: pointer;
+        }
+        .menu{
+            display: none;
+            position: relative;
+            z-index: 1000;
+            font-size: 1.8rem;
+            background: transparent;
+            border: none;
+        }
+        @media (max-width:760px) {
+            nav a:not(.logo),.user-action{
+                display: none;
+            }
+            .menu{
+                display: block;
+            }
+        }
+
+        .dropdown{ 
+            position: absolute;
+            top: 0;
+            right: 0;
+            transform: scale(0);
+            background: silver; 
+            height: 100vh;
+            width: 100vw;
+            padding: 5rem 1rem 2rem;
+            transition: .5s ease-in-out;
+            z-index: 500;
+        }
+        .menu.active + .dropdown{
+            display: block;
+            transform: scale(1);
+        }
+.dropdown a:not(.btn_r){
+            display: flex;
+            width: 100%;
+            padding: 10px 5px;
+            font-size: 1.5rem;
+        }
+        hr{
+            border-color: black;
+            margin-top: 1rem;
+        }.dropdown div{
+            padding: 10px 5px;
+            text-align: center;
+            color: green;
+            font-size: 1.1rem;
+        }
+        .dropdown div .btn_r{
+            border-radius: 10px;
+            padding: 8px 20px;
+            font-size: 1.5rem;
+            color: silver;
+            background: brown;
+            border: none;
+            cursor: pointer;  
+        }
+      header  p span{
+            font-size: 1.8rem;
+            font-weight: bolder;
+        }
+        
+    </style>
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a href="index.html" class="logo">
+                        <img src="IMG_20250805_060427_060.png" alt="">
+                        <p>ደብረ ገነት</p>
+                    </a>
+                </li>
+                <li><a href="https://orthodoxmezmur.com/">መዝሙር</a></li>
+                <li><a href="menfesawiGxmoch.html">መንፈሳዊ ግጥሞች</a></li>
+                <li><a href="merhagbrat.html">መርሀግብራት</a></li>
+                <li><a href="images.html">የሰንበት ት/በቱ ማስታወሻዎች</a></li>
+            </ul>
+        </nav>
+        <div class="user-action">
+            <button>ምዝገባ</button>
+        </div>
+        <button class="menu"><i class="ri-menu-3-line"></i></button>
+        <div class="dropdown"> 
+            <ul>
+                <li><a href="https://orthodoxmezmur.com/">መዝሙር</a></li>
+                <li><a href="menfesawiGxmoch.html">መንፈሳዊ ግጥሞች</a></li>
+                <li><a href="merhagbrat.html">መርሀግብራት</a></li>
+                <li><a href="images.html">የሰንበት ት/በቱ ማስታወሻዎች</a></li>
+            </ul>
+            <hr>
+            <div>
+                <p>የደብረ ገነት ሰንበት ት/በትን ለመቀላቀል ይፈልጋሉ?</p> 
+                <br>
+                <a href="form.html" class="btn_r">ለመመዝገብ</a>
+            </div>
+            <hr>
+            <div>
+                <p>ሰንበት ት/በቱን በገንዘብ ለመደገፍ ከታች ባለዉ account ቁጥር ድጋፍ ማድረግ ይችላሉ! <br> <span>1000182896288</span></p>
+            </div>
+        </div>
+    </header>
+    <script>
+        const btn=document.querySelector('.menu');
+        btn.addEventListener('click', ()=>{
+            btn.classList.toggle('active'); 
+            if(btn.classList.contains('active')){
+               btn.innerHTML='<i class="ri-close-line"></i>';
+            }else{
+               btn.innerHTML='<i class="ri-menu-3-line"></i>';
+            }
+            
+        });
+    </script>
+ <main>
+    <div class="header">
+  <h1>መንፈሳዊ ግጥሞች</h1>
+  <p class="lead">ይህ ገፅ ለማንኛውም ጊዜ ማንበብ እና ማመስገን የሚረዳ መንፈሳዊ ግጥሞችን ይዞ ነው።</p>
+</div>
+
+<div class="container" id="poem-container">
+
+  <article class="card collapsed">
+    <div class="title">
+      <h2>1. በጸጋው እሳት</h2>
+      <div class="meta">ልብ የተነፈሰ — መንፈስ</div>
+    </div>
+    <div class="poem">
+እግዚአብሔር ላይ ተቀምጬ እገሣ,
+እያለኝ ትምክሕት ይገረዳ።
+በሃይል የባለ በርትታ ሲነሣ,
+ነፍሴን ይንሳ ይታደስ ይባረክ።
+
+እንግዲህ ማዕበል እንደ እሳት,
+በከንፈሮቼ ውስጥ ብርሃን ይብራ።
+እርሱ የማርከያ ፍቅር ነው እንጂ,
+የሕይወት መርምሮ ተስፋ ይሰጥ።
+    </div>
+    <div class="controls">
+      <button class="open">View Full</button>
+      <button class="copy ghost">Copy</button>
+    </div>
+  </article>
+
+  <article class="card collapsed">
+    <div class="title">
+      <h2>2. የጸሎት ድምብ</h2>
+      <div class="meta">ለጸሎት ዝግጅት</div>
+    </div>
+    <div class="poem">
+እጸላለሁ ብለዋለሁ በለውጥ ምክንያት,
+ከጭንቀት ሲወጣ ልቤ ይጨምራል።
+ቃሌ ሲሆን ለዘላለም ማረፊያ,
+በዚያ ደስታ እንደ ጸሎት ይገኛል።
+
+እያንዳንዱ ጸሎት እንኳን እንዲፈጥር,
+ልቤን ማስታወስ ይህን ብቻ ይፈልጋል።
+    </div>
+    <div class="controls">
+      <button class="open">View Full</button>
+      <button class="copy ghost">Copy</button>
+    </div>
+  </article>
+
+  <article class="card collapsed">
+    <div class="title">
+      <h2>3. በጸጋ መንገድ</h2>
+      <div class="meta">በቀርበት ጊዜ</div>
+    </div>
+    <div class="poem">
+ብርሃን ይዞ መንገዴን እሄዳለሁ,
+እስከሚያደርጉ ድረስ እንደ እምነት.
+ከጭንቀት ማረፊያ ይገኛሉ እጅዬ,
+በጐዳና ላይ ሲያሳርፍ ተስፋ ይወጣ።
+
+እግዚአብሔር የታሰረውን ይታገሣ,
+ምስጋና በንፁህ ልቦና ይመስላል።
+    </div>
+    <div class="controls">
+      <button class="open">View Full</button>
+      <button class="copy ghost">Copy</button>
+    </div>
+  </article>
+
+  <article class="card collapsed">
+    <div class="title">
+      <h2>4. ርስት የማርከያ</h2>
+      <div class="meta">የመንፈሳዊ ርዕሰ ጉዳይ</div>
+    </div>
+    <div class="poem">
+ርስት የቀደሙ ገጾች ውስጥ ነው,
+በጸጋ የተቀመጡ ማስታወሻዎች.
+እያንዳንዱ ቀን እንደ ትናንት,
+በደስታ ይህን መንፈስ ይዘው ይሄዳሉ።
+
+እኛ የሚቀጥለው የፍቅር ሥርዓት,
+በግንዛቤ ይተኮሳል በቅዱስ ጠባብ።
+    </div>
+    <div class="controls">
+      <button class="open">View Full</button>
+      <button class="copy ghost">Copy</button>
+    </div>
+  </article>
+
+  <article class="card collapsed">
+    <div class="title">
+      <h2>5. የማርከያ ጸሎት</h2>
+      <div class="meta">ዕረፍት እና ምስጋና</div>
+    </div>
+    <div class="poem">
+እርሱ የመድኃኒት ነው የነፍሴ ጭንቀትን,
+እጆቼን እንደ ማዕዘን ሲያደርግ።
+በአረም ስር ሲጠጣ ስታደግ ይህንን ስለሆነ,
+ልቤ እንደ ዕድል ይበረታል።
+
+እንደዚህ በዘመኔ ልቤ ይታያል,
+በጸጋ የሚኖር ሕይወት እንዲሆን ይመክራል።
+    </div>
+    <div class="controls">
+      <button class="open">View Full</button>
+      <button class="copy ghost">Copy</button>
+    </div>
+  </article>
+
+  <article class="card collapsed">
+    <div class="title">
+      <h2>6. እምነትና ታማኝነት</h2>
+      <div class="meta">እርሱ የሕይወት መንቀሳቀስ</div>
+    </div>
+    <div class="poem">
+እምነት መሪ ይሁን መልካም መንገድ,
+እያንዳንዳ ልብ በደስታ ይበራ.
+እንኳን የእርሱ እጅ እንደ ገና ተደርጎ,
+የሕይወት መብት ብርሃን ይሰጥ።
+    </div>
+    <div class="controls">
+      <button class="open">View Full</button>
+      <button class="copy ghost">Copy</button>
+    </div>
+  </article>
+
+</div>
+
+<footer>
+  ፋይሉን ማስተካከል፣ ግጥሞችን መጨመር ወይም ማስወገድ ትችላላችሁ።
+</footer>
+
+ </main>
+<script>
+  // open full poem (toggle collapsed)
+  document.querySelectorAll('.card').forEach((card, idx) => {
+    const btn = card.querySelector('.open');
+    const copyBtn = card.querySelector('.copy');
+    btn.addEventListener('click', () => {
+      // close other cards if you want only one open:
+      document.querySelectorAll('.card').forEach(c => c.classList.add('collapsed'));
+      card.classList.remove('collapsed');
+      // scroll into view nicely
+      card.scrollIntoView({behavior:'smooth', block:'center'});
+    });
+    // copy poem text to clipboard
+    if (navigator.clipboard && copyBtn) {
+      copyBtn.addEventListener('click', async () => {
+        const text = card.querySelector('.poem').innerText.trim();
+        try {
+          await navigator.clipboard.writeText(text);
+          copyBtn.innerText = 'Copied';
+          setTimeout(()=> copyBtn.innerText = 'Copy', 1200);
+        } catch (e){
+          alert('ኮፒ አልተሳካም። እባክዎ እንደገና ይሞክሩ።');
+        }
+      });
+    }
+  });
+
+  // double-click on open card to collapse it
+  document.querySelectorAll('.card').forEach(card=>{
+    card.addEventListener('dblclick', ()=> {
+      card.classList.add('collapsed');
+    });
+  });
+
+  // optional: open first poem by default
+  // document.querySelector('.card')?.classList.remove('collapsed');
+</script>
+
+</body>
+</html>

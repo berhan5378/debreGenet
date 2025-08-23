@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrollable Gallery with Full View + Navigation</title>
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+<style>
+  body {
+    margin: 0;
+    background: #000;
+  }
+
+  /* Scrollable gallery */
+  .gallery {
+    display: flex;  
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 10px;
+  }
+  .gallery img {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: transform 0.2s;
+  }
+  .gallery img:hover {
+    transform: scale(1.05);
+  }
+
+  /* Fullscreen view */
+  .lightbox {
+    display: none;
+    position: fixed;
+    z-index: 2099;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .lightbox img {
+    max-width: 90%;
+    max-height: 80%;
+    border-radius: 8px;
+  }
+
+  /* Close button */
+  .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  /* Navigation buttons */
+  .nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    background: rgba(0,0,0,0.3);
+    padding: 10px;
+    border-radius: 5px;
+    user-select: none;
+  }
+  .prev { left: 20px; }
+  .next { right: 20px; }
+  .nav-btn:hover {
+    background: rgba(0,0,0,0.6);
+  }
+</style>
+</head>
+<body>
+        <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        ul{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        header{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: silver;
+            padding: 10px 1rem;
+            position: relative; 
+        }
+        nav ul{
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        a{
+            text-decoration: none;
+            color: brown;
+            font-size: 1.1rem;
+        }
+        header img,footer img{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color:#ffffff;
+        }
+        .logo{
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 1.8rem;
+            font-weight: bolder;
+            margin-right: .7rem;
+            position: relative;
+            z-index: 1000;
+        }
+        .user-action button{
+            border-radius: 10px;
+            padding: 8px 20px;
+            font-size: 1rem;
+            color: silver;
+            background: brown;
+            border: none;
+            cursor: pointer;
+        }
+        .menu{
+            display: none;
+            position: relative;
+            z-index: 1000;
+            font-size: 1.8rem;
+            background: transparent;
+            border: none;
+        }
+        @media (max-width:760px) {
+            nav a:not(.logo),.user-action{
+                display: none;
+            }
+            .menu{
+                display: block;
+            }
+        }
+
+        .dropdown{ 
+            position: absolute;
+            top: 0;
+            right: 0;
+            transform: scale(0);
+            background: silver; 
+            height: 100vh;
+            width: 100vw;
+            padding: 5rem 1rem 2rem;
+            transition: .5s ease-in-out;
+            z-index: 500;
+        }
+        .menu.active + .dropdown{
+            display: block;
+            transform: scale(1);
+        }
+        .dropdown a:not(.btn_r){
+            display: flex;
+            width: 100%;
+            padding: 10px 5px;
+            font-size: 1.5rem;
+        }
+        hr{
+            border-color: black;
+            margin-top: 1rem;
+        }.dropdown div{
+            padding: 10px 5px;
+            text-align: center;
+            color: green;
+            font-size: 1.1rem;
+        }
+        .dropdown div .btn_r{
+            border-radius: 10px;
+            padding: 8px 20px;
+            font-size: 1.5rem;
+            color: silver;
+            background: brown;
+            border: none;
+            cursor: pointer;  
+        }
+      header  p span{
+            font-size: 1.8rem;
+            font-weight: bolder;
+        }
+        
+    </style>
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a href="index.html" class="logo">
+                        <img src="IMG_20250805_060427_060.png" alt="">
+                        <p>ደብረ ገነት</p>
+                    </a>
+                </li>
+                <li><a href="https://orthodoxmezmur.com/">መዝሙር</a></li>
+                <li><a href="menfesawiGxmoch.html">መንፈሳዊ ግጥሞች</a></li>
+                <li><a href="merhagbrat.html">መርሀግብራት</a></li>
+                <li><a href="images.html">የሰንበት ት/በቱ ማስታወሻዎች</a></li>
+            </ul>
+        </nav>
+        <div class="user-action">
+            <button>ምዝገባ</button>
+        </div>
+        <button class="menu"><i class="ri-menu-3-line"></i></button>
+        <div class="dropdown"> 
+            <ul>
+                <li><a href="https://orthodoxmezmur.com/">መዝሙር</a></li>
+                <li><a href="menfesawiGxmoch.html">መንፈሳዊ ግጥሞች</a></li>
+                <li><a href="merhagbrat.html">መርሀግብራት</a></li>
+                <li><a href="images.html">የሰንበት ት/በቱ ማስታወሻዎች</a></li>
+            </ul>
+            <hr>
+            <div>
+                <p>የደብረ ገነት ሰንበት ት/በትን ለመቀላቀል ይፈልጋሉ?</p> 
+                <br>
+                <a href="form.html" class="btn_r">ለመመዝገብ</a>
+            </div>
+            <hr>
+            <div>
+                <p>ሰንበት ት/በቱን በገንዘብ ለመደገፍ ከታች ባለዉ account ቁጥር ድጋፍ ማድረግ ይችላሉ! <br> <span>1000182896288</span></p>
+            </div>
+        </div>
+    </header>
+    <script>
+        const btn=document.querySelector('.menu');
+        btn.addEventListener('click', ()=>{
+            btn.classList.toggle('active'); 
+            if(btn.classList.contains('active')){
+               btn.innerHTML='<i class="ri-close-line"></i>';
+            }else{
+               btn.innerHTML='<i class="ri-menu-3-line"></i>';
+            }
+            
+        });
+    </script>
+<div class="gallery">
+    <img src="img/1754625477890.jpg" alt="">
+    <img src="img/1754626137834.jpg" alt="">
+    <img src="img/1754625760766.jpg" alt="">
+    <img src="img/1754625790326.jpg" alt="">
+    <img src="img/1754626151448.jpg" alt="">
+    <img src="img/1754625820812.jpg" alt="">
+    <img src="img/1754625840868.jpg" alt="">
+    <img src="img/1754625860916.jpg" alt="">
+    <img src="img/1754625939784.jpg" alt="">
+    <img src="img/1754626447845.jpg" alt="">
+    <img src="img/1754626494860.jpg" alt="">
+    <img src="img/1754626686624.jpg" alt="">
+    <img src="img/1754626705467.jpg" alt="">
+    <img src="img/1754626715428.jpg" alt="">
+    <img src="img/1754626727952.jpg" alt="">
+    <img src="img/1754626739159.jpg" alt="">
+    <img src="img/1754626748889.jpg" alt="">
+    <img src="img/1754626758235.jpg" alt="">
+    <img src="img/1754626771941.jpg" alt="">
+    <img src="img/1754626800941.jpg" alt="">
+    <img src="img/1754626827306.jpg" alt="">
+    <img src="img/1754626845636.jpg" alt="">
+    <img src="img/1754626857782.jpg" alt="">
+    <img src="img/1754626869186.jpg" alt="">
+    <img src="img/1754626885739.jpg" alt="">
+    <img src="img/1754626895186.jpg" alt="">
+    <img src="img/1754626904898.jpg" alt="">
+    <img src="img/1754626912783.jpg" alt="">
+    <img src="img/1754626921157.jpg" alt="">
+    <img src="img/1754626947796.jpg" alt="">
+    <img src="img/1754626960860.jpg" alt="">
+    <img src="img/1754626970605.jpg" alt="">
+    <img src="img/1754626979671.jpg" alt="">
+    <img src="img/1754626987858.jpg" alt="">
+    <img src="img/1754627042918.jpg" alt="">
+    <img src="img/1754627050365.jpg" alt="">
+    <img src="img/1754627056862.jpg" alt="">
+    <img src="img/1754627071951.jpg" alt="">
+    <img src="img/1754627080471.jpg" alt="">
+    <img src="img/1754627101934.jpg" alt="">
+    <img src="img/1754627111846.jpg" alt="">
+    <img src="img/1754627120313.jpg" alt="">
+    <img src="img/1754627129431.jpg" alt="">
+    <img src="img/1754627137764.jpg" alt="">
+    <img src="img/1754627146947.jpg" alt="">
+    <img src="img/1754627156739.jpg" alt="">
+    <img src="img/1754627165955.jpg" alt="">
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <a href="#" class="close">&times;</a>
+  <span class="nav-btn prev">&#10094;</span>
+  <img id="lightbox-img" src="">
+  <span class="nav-btn next">&#10095;</span>
+</div>
+
+<script>
+const images = document.querySelectorAll('.gallery img');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+let currentIndex = 0;
+
+function showImage(index) {
+  currentIndex = (index + images.length) % images.length; // wrap around
+  lightboxImg.src = images[currentIndex].src;
+  lightbox.style.display = 'flex';
+}
+
+// Open lightbox on image click
+images.forEach((img, index) => {
+  img.addEventListener('click', () => {
+    showImage(index);
+  });
+});
+
+// Close lightbox
+document.querySelector('.close').addEventListener('click', (e) => {
+  e.preventDefault();
+  lightbox.style.display = 'none';
+});
+
+// Prev / Next navigation
+document.querySelector('.prev').addEventListener('click', () => {
+  showImage(currentIndex - 1);
+});
+document.querySelector('.next').addEventListener('click', () => {
+  showImage(currentIndex + 1);
+});
+</script>
+
+</body>
+</html>
