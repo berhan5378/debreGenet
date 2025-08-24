@@ -175,6 +175,8 @@
             }
             
         });
+
+        
     </script>
     <style>
         *{
@@ -224,12 +226,26 @@
 <section>
     <div>
     <h1>የደብረ ገነት ሰንበት ት/በት የምዝገባ ፎርም </h1>
-    <form action="#">
-        <input type="text" name="" id="" placeholder="ስም">
-        <input type="number" name="" id="" placeholder="ስልክ ቁጥር">
-        <input type="text" name="" id="" placeholder="ሰፈር">
+    <form  id="contactForm">
+        <input type="text" name="" id="name" required placeholder="ስም">
+        <input type="number" name="" id="phone" required placeholder="ስልክ ቁጥር">
+        <input type="text" name="" id="sefer" required placeholder="ሰፈር">
         <button type="submit">ተመዝገብ</button>
     </form>
+    <script>
+         document.getElementById("contactForm").addEventListener("submit", function(event){
+      event.preventDefault();
+
+      let name = document.getElementById("name").value;
+      let phone = document.getElementById("phone").value;
+      let sefer = document.getElementById("sefer").value;
+
+      let subject = "New Contact Form Submission";
+      let body = `Name: ${name}%0APhone: ${phone}%0ASefer: ${sefer}`;
+
+      window.location.href = `mailto:berhan5378@gmail.com?subject=${subject}&body=${body}`;
+    });
+    </script>
     </div>
 </section>
 </body>
